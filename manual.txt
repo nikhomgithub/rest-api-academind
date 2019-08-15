@@ -1,0 +1,24 @@
+server.js 
+    App.js
+        mongo connection
+        morgan log
+        body parser
+        cross origin
+        route 
+            app.js
+                user.js
+                    sign_up
+                    log_in
+                    delete_id
+                product.js
+                    get_products
+                    post_product
+                    get_product_byID
+                    update_product_byID
+                    delete_product_byID
+                order.js
+                    get_orders
+                    post_order
+                    get_order_byID
+                    delete_order_byID
+        last error
