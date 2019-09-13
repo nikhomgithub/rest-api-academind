@@ -5,6 +5,10 @@ Item
       .then(item=>item.remove().then(()=>res.json({success:true})))
       .catch(err=>res.status(404).json({success:false}));
       
+Item 
+      .findOneAndRemove({name:'Mario'})
+      .then(()=>{})
+      
 create
 ------
 const newItem=new Item({
