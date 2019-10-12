@@ -33,8 +33,44 @@ server.js
                                                                
                 order.js => "/orders/"
                     get_all_orders      => get "/"  
-                    
-                    post_order
-                    get_order_byID
-                    delete_order_byID
+                                           checkAuth
+                                                               => OrdersController.orders_get_all
+                    post_order          => post "/"
+                                           checkAuth
+                                                               => OrdersController.orders_create_order
+                    get_order_byID      => get "/:orderId"
+                                           checkAuth 
+                                                               => OrdersController.orders_get_order                                            
+                    delete_order_byID   => delete "/:orderId"   
+                                           checkAuth
+                                                               => OrdersController.orders_delete_order
+        
         error {message:"NotFound",status:404}
+        
+==========================================================
+check-auth.js    (req, res, next)        
+        token = req.headers.authorization.split(" ")[1];
+            decoded = jwt.verify(token, process.env.JWT_KEY);
+                req.userData = decoded;
+
+==========================================================
+user.js
+    user_signup (req, res, next)
+         User.find ({ email: req.body.email })  //"Mail exists" or not
+            bcrypt.hash (req.body.password, 10 ) => hash
+                user = new User(_id,email,hash password)
+                user.save()
+                    res.status(201).json ({message: "User created"})
+                
+    user_login (req, res, next) 
+        User.find({ email: req.body.email }) => user //result
+            bcrypt.compare(req.body.password, user[0].password) 
+                token = jwt.sign (email,_id,JWT.KEY,expiresIn) 
+                
+        
+        
+        
+        
+        
+        
+        
