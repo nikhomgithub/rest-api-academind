@@ -44,7 +44,7 @@ server.js
                                            checkAuth
                                                                => OrdersController.orders_delete_order
         
-        error  //res.404."NotFound"
+        error                                               //res.404."NotFound"
         
 ==========================================================
 check-auth.js    (req, res, next)        
@@ -62,7 +62,7 @@ user.js
                 user.save()                                // catch
                     res.201."User created"
           catch                                            //res.201.error
-          
+------------------------------------------          
     user_login (req, res, next) 
         User.find({ email: req.body.email }) => user             //catch
             if (user.length < 1)                                 //res.401."Auth failed"
@@ -70,12 +70,56 @@ user.js
                 token = jwt.sign (email,_id,JWT.KEY,expiresIn)   
                     res.200."Auth successful"
         catch                                                    //res.500.err
-  
+-------------------------------------------  
     user_delete (req, res, next) 
         User.remove({ _id: req.params.userId })    
             res.200."user deleted"
         catch                                                    //res.500.err
             
+=========================================================
+
+product.js
+    products_get_all (req, res, next)
+         Product.find()     
+            res.200.product(name price _id productImage) 
+         catch                                                   //res.500.err
+-------------------------------------------
+    products_create_product (req, res, next)
+         product = new Product(_id,name,price,productImage)
+         product.save()
+            res.200."created successfully",product
+         catch                                                   //res.500.err 
+-------------------------------------------            
+    products_get_product (req, res, next)       
+         Product.findById(req.params.productId;)   
+            if (product)                                         //res.404."No id found"
+                res.200.product 
+         catch                                                   //res.500.err 
+-------------------------------------------   
+    products_update_product (req, res, next)            
+         Product.update({ _id: id }, { $set: updateOps } 
+            res.200."Updated"
+         catch                                                    //res.500.err
+-------------------------------------------            
+    products_delete (req, res, next)             
+         Product.remove({ _id:req.params.productId})
+            res.200."removed"
+         catch                                                    //res.500.err    
+=========================================================           
+            
+            
+            
+            
+            
+            
+            
+        
+        
+        
+        
+        
+        
+        
         
         
         
