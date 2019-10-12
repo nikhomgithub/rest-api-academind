@@ -1,24 +1,40 @@
 server.js 
     App.js
         mongo connection
+            model 
+                order.js (_id,product,quantity)
+                product.js (_id,name,price,productImage)
+                user.js (_id,image,password)
         morgan log
         body parser
         cross origin
+        static '/uploads'
         route 
             app.js
-                user.js
-                    sign_up
-                    log_in
-                    delete_id
-                product.js
-                    get_products
-                    post_product
-                    get_product_byID
-                    update_product_byID
-                    delete_product_byID
-                order.js
-                    get_orders
+                user.js             => "/user/"
+                    sign_up             => post "/signup"
+                    log_in              => post "/login"
+                    delete_id           => delete "/:userId"
+                    
+                product.js          => "/products/"
+                    get_all_products    => get "/"             => ProductsController.products_get_all     
+                    post_product        => post "/"   
+                                           checkAuth 
+                                           upload.single('productImage') => upload = multer()
+                                                               => ProductsController.products_create_product
+                    get_product_byID    => get "/:productId"   => ProductsController.products_get_product
+                                
+                    update_product_byID => patch "/:productId" 
+                                           checkAuth
+                                                               => ProductsController.products_update_product                    
+                    delete_product_byID => delete "/:productId"
+                                           checkAuth
+                                                               => ProductsController.products_delete
+                                                               
+                order.js => "/orders/"
+                    get_all_orders      => get "/"  
+                    
                     post_order
                     get_order_byID
                     delete_order_byID
-        last error
+        error {message:"NotFound",status:404}
