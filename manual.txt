@@ -10,7 +10,6 @@ server.js
         cross origin
         static '/uploads'
         route 
-            app.js
                 user.js             => "/user/"
                     sign_up             => post "/signup"
                     log_in              => post "/login"
@@ -45,7 +44,7 @@ server.js
                                            checkAuth
                                                                => OrdersController.orders_delete_order
         
-        error {message:"NotFound",status:404}
+        error  //res.404."NotFound"
         
 ==========================================================
 check-auth.js    (req, res, next)        
