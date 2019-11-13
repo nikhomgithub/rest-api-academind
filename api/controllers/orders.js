@@ -6,7 +6,10 @@ const Product = require("../models/product");
 exports.orders_get_all = (req, res, next) => {
   Order.find()
     .select("product quantity _id")
-    .populate("product", "name")
+    .populate("product", "name")   
+        //in models/order orderSchema , we have product === productId ref:'Product', 
+        // we get all info of that product include _id,name,price
+        // if we want just "name"  we populate "name"
     .exec()
     .then(docs => {
       res.status(200).json({
